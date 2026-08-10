@@ -1689,6 +1689,8 @@ function defineWord(word){
     '<div style="display:flex;justify-content:space-between;align-items:center;'+
     'background:#1a3c5e;color:#fff;padding:14px 20px;border-radius:10px 10px 0 0;">'+
     '<b style="font-size:20px;">'+word+'</b>'+
+    '<button id="defSpeak" style="background:none;border:none;color:#fff;font-size:22px;'+
+    'cursor:pointer;line-height:1;padding:0 4px;"</button>'+
     '<button id="defClose" style="background:none;border:none;color:#fff;font-size:28px;'+
     'cursor:pointer;line-height:1;padding:0 4px;">&times;</button></div>'+
 '<div style="padding:20px;color:#222;">'+
@@ -1699,12 +1701,18 @@ function defineWord(word){
     'text-decoration:none;border-radius:6px;font-size:16px;">Search Online</a>'))+
     '</div>';
   popup.style.display="block";
+   // speak the word and its definition
+  speechSynthesis.cancel();
+  let u=new SpeechSynthesisUtterance(word+". ");
+  speechSynthesis.speak(u);
   document.getElementById("defClose").onclick=function(){
+        speechSynthesis.cancel();
     popup.style.display="none";
   };
   popup._outsideHandler=function(e){
     if(!popup.contains(e.target)){
       popup.style.display="none";
+            speechSynthesis.cancel();
       document.removeEventListener("mousedown",popup._outsideHandler);
     }
   };
