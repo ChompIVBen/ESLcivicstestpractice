@@ -301,6 +301,9 @@ select:hover{
 }
 
 @media (max-width:650px){
+   p {
+    color: #222;
+  }
   header{
     padding:22px 16px 24px;
   }
@@ -387,6 +390,12 @@ select:hover{
 
 
 <div class="card">
+  <select id="jump"></select>
+Section:
+<div  id="section"></div>
+<div id="question" style="width:100%px;height:200px;box-sizing:border-box;overflow-y:auto;overflow-x:hidden;overflow-wrap:break-word;"></div>
+<br>All are correct: <button onclick="showAnswer()" style="background-color: #087443;">Show Answer</button>
+<div id="answer" style="display:none;"></div>
 
 <div class="controls">
 
@@ -400,19 +409,13 @@ select:hover{
 
 <button onclick="speakAnswer()">🔊 Answer</button>
 
-<select id="jump"></select>
 <div id="counter"></div>
 
+
 </div>
-Section:
-<div  id="section"></div>
-<hr>
-<div id="question"></div>
+
 
 <hr>
-All are correct:
-<button onclick="showAnswer()">Show Answer</button>
-<div id="answer" style="display:none;"></div>
 
 
 </div>
