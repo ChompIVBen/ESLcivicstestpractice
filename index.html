@@ -392,7 +392,7 @@ select:hover{
 Section:
 <div  id="section"></div>
 <div id="question" style="width:100%px;height:200px;box-sizing:border-box;overflow-y:auto;overflow-x:hidden;overflow-wrap:break-word;"></div>
-<br>All are correct: <button onclick="showAnswer()" style="background-color: #087443;">Show Answer</button>
+<br>All are correct: <button onclick="showAnswer()" id="answerbutt" style="background-color: #087443;">Show Answer</button>
 <div id="answer" style="display:none;"></div>
 
 <div class="controls">
@@ -436,8 +436,20 @@ naturalization interview.</p>
 
 <script>
 function showAnswer(){
-    document.getElementById("answer").style.display = "block";
+    const answer = document.getElementById("answer");
+        const answerbutt = document.getElementById("answerbutt");
+
+    if (answer.style.display === "block") {
+        answer.style.display = "none";
+                answerbutt.textContent = "Show Answer";
+
+    } else {
+        answer.style.display = "block";
+                answerbutt.textContent = "Hide Answer";
+
+    }
 }
+
 const questions=[ //go through and conjoin what makes sense using "&nbsp;" instead of space
 {
 section:"American Government",
