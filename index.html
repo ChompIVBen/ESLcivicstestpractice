@@ -1668,30 +1668,51 @@ onclick="defineWord('${clean}')">${word}</span>`;
 }
 
 function defineWord(word){
-  let clean=word.toLowerCase().replace(/[^a-z0-9'-]/g,"");
+  let clean=word.toLowerCase().replace(/^["'"']+|["'"']+$/g,"").trim();
   let def=definitions[clean];
   if(!def){
-    // try without leading/trailing hyphens or apostrophes
-    clean=clean.replace(/^[-']+|[-']+$/g,"");
+    clean=clean.replace(/[^a-z0-9'\s-]/g,"").trim();
     def=definitions[clean];
   }
   let popup=document.getElementById("defPopup");
   if(!popup){
     popup=document.createElement("div");
     popup.id="defPopup";
-    popup.style.cssText="position:fixed;background:#fff;border:2px solid #333;border-radius:8px;padding:12px 16px;max-width:300px;box-shadow:0 4px 12px rgba(0,0,0,.3);z-index:9999;font-size:14px;line-height:1.4;display:none;";
+    popup.style.cssText=
+      "position:fixed;background:#fff;border:2px solid #333;border-radius:12px;"+
+      "padding:0;max-width:420px;width:90vw;box-shadow:0 8px 32px rgba(0,0,0,.4);"+
+      "z-index:99999;font-size:18px;line-height:1.5;"+
+      "display:none;top:50%;left:50%;transform:translate(-50%,-50%);";
     document.body.appendChild(popup);
   }
-  popup.innerHTML="<b>"+word+"</b><br>"+(def||"No definition found.");
+  popup.innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:center;'+
+    'background:#1a3c5e;color:#fff;padding:14px 20px;border-radius:10px 10px 0 0;">'+
+    '<b style="font-size:20px;">'+word+'</b>'+
+    '<button id="defClose" style="background:none;border:none;color:#fff;font-size:28px;'+
+    'cursor:pointer;line-height:1;padding:0 4px;">&times;</button></div>'+
+'<div style="padding:20px;color:#222;">'+
+    (def||('No definition found.<br><br>'+
+    '<a href="https://search.brave.com/search?q='+encodeURIComponent('define '+word)+'" '+
+    'target="_blank" '+
+    'style="display:inline-block;padding:8px 16px;background:#1a73e8;color:#fff;'+
+    'text-decoration:none;border-radius:6px;font-size:16px;">Search Online</a>'))+
+    '</div>';
   popup.style.display="block";
-  // position near center of viewport
-  popup.style.left=(window.innerWidth/2-popup.offsetWidth/2)+"px";
-  popup.style.top=(window.innerHeight/2-popup.offsetHeight/2)+"px";
-  clearTimeout(popup._timer);
-  popup._timer=setTimeout(()=>{popup.style.display="none";},5000);
-  // also close on click
-  popup.onclick=()=>{popup.style.display="none";};
+  document.getElementById("defClose").onclick=function(){
+    popup.style.display="none";
+  };
+  popup._outsideHandler=function(e){
+    if(!popup.contains(e.target)){
+      popup.style.display="none";
+      document.removeEventListener("mousedown",popup._outsideHandler);
+    }
+  };
+  setTimeout(function(){
+    document.addEventListener("mousedown",popup._outsideHandler);
+  },0);
 }
+
 
 function render(){
 
