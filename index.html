@@ -126,7 +126,7 @@ cursor:pointer;
 
 <header>
 <img src="image.png" style="position:relative;top:10px;width:15%;">
-<h1>666ESL-Friendly US Citizenship Test Practice</h1>
+<h1>ESL-Friendly US Citizenship Test Practice</h1>
 <h1>Don't know a word? -> Click it to learn!</h1>
 
 </header>
@@ -1798,16 +1798,19 @@ function speakAnswer(){
     speechSynthesis.cancel();
 
     let text = questions[current].answer
-        .replace(/ /g, " ")
-        .replace(/[,;:]/g, ". ")
+        .replace(/<br\s*\/?>/gi, ". ")
+        .replace(/•/g, "")
+        .replace(/[“”"']/g, "")
+        .replace(/,/g, "")
         .replace(/\s+/g, " ")
         .replace(/&nbsp;/g, " ")
 .replace(/<br>/g, ". ")
         .trim();
 
-    speechSynthesis.speak(
-        new SpeechSynthesisUtterance(text)
-    );
+    let u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US";
+
+    speechSynthesis.speak(u);
 }
 
 const select=document.getElementById("jump");
@@ -1827,7 +1830,7 @@ select.appendChild(option);
 select.onchange=function(){
 
 current=parseInt(this.value);
-speechSynthesis.cancel();
+    speechSynthesis.cancel();
 
 render();
 
