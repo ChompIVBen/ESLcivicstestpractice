@@ -1942,11 +1942,9 @@ function defineWord(word){
     document.body.appendChild(popup);
   }
   popup.innerHTML=
-    '<div style="display:flex;justify-content:space-between;align-items:center;'+
-    'background:#1a3c5e;color:#fff;padding:14px 20px;border-radius:10px 10px 0 0;">'+
-    '<b style="font-size:20px;">'+word+'</b>'+
-    '<button id="defClose" style="background:none;border:none;color:#fff;font-size:28px;'+
-    'cursor:pointer;line-height:1;padding:0 4px;">&times;</button></div>'+
+  '<div style="display:flex;justify-content:space-between;align-items:center;background:#1a3c5e;color:#fff;padding:8px 12px;border-radius:10px 10px 0 0;">'+
+'<b style="font-size:20px;line-height:1;">'+word+'</b>'+
+'<button id="defClose" style="background:none;border:0;color:#fff;font-size:20px;cursor:pointer;line-height:1;padding:0;margin:0;flex:0 0 20px; max-width:50px;height:20px;min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;">&times;</button></div>'+
 '<div style="padding:20px;color:#222;">'+
     (def||('No definition found.<br><br>'+
     '<a href="https://search.brave.com/search?q='+encodeURIComponent('define '+word)+'" '+
