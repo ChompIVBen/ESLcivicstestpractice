@@ -392,7 +392,7 @@ select:hover{
 Section:
 <div  id="section"></div>
 <div id="question" style="width:100%px;height:200px;box-sizing:border-box;overflow-y:auto;overflow-x:hidden;overflow-wrap:break-word;"></div>
-<br>All are correct: <button onclick="showAnswer()" id="answerbutt" style="background-color: #087443;">Show Answer</button>
+<br><button onclick="showAnswer()" id="answerbutt" style="background-color: #087443;">Show Answer</button>
 <div id="answer" style="display:none;"></div>
 
 <div class="controls">
@@ -445,7 +445,7 @@ function showAnswer(){
 
     } else {
         answer.style.display = "block";
-                answerbutt.textContent = "Hide Answer";
+                answerbutt.textContent = "Show Answer";
 
     }
 }
@@ -2000,7 +2000,7 @@ document.getElementById("question").innerHTML=
 makeClickable(q.question);
 
 document.getElementById("answer").innerHTML=
-makeClickable(q.answer);
+"All are correct:<br>" + makeClickable(q.answer);
 document.getElementById("answer").style.display = "none";
 document.getElementById("jump").value=current;
 
