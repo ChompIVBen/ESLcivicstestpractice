@@ -2058,7 +2058,7 @@ questions[current].question
 
 function speakAnswer(){
     speechSynthesis.cancel();
-
+showAnswer();
     let text = questions[current].answer
         .replace(/<br\s*\/?>/gi, ". ")
         .replace(/•/g, "")
