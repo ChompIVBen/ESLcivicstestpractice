@@ -1795,20 +1795,19 @@ questions[current].question
 }
 
 function speakAnswer(){
+    speechSynthesis.cancel();
 
-speechSynthesis.cancel();
+    let text = questions[current].answer
+        .replace(/ /g, " ")
+        .replace(/[,;:]/g, ". ")
+        .replace(/\s+/g, " ")
+        .replace(/&nbsp;/g, " ")
+.replace(/<br>/g, ". ")
+        .trim();
 
-speechSynthesis.speak(
-
-new SpeechSynthesisUtterance(
-questions[current].answer
-.replace(/&nbsp;/g, " ")
-.replace(/<br>/g, ". "))
-
-
-
-);
-
+    speechSynthesis.speak(
+        new SpeechSynthesisUtterance(text)
+    );
 }
 
 const select=document.getElementById("jump");
@@ -1828,6 +1827,7 @@ select.appendChild(option);
 select.onchange=function(){
 
 current=parseInt(this.value);
+speechSynthesis.cancel();
 
 render();
 
