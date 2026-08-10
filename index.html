@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<title>ESL-Friendly US Citizenship Test Practice</title>
+  <link rel="icon" href="image.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+
+font-family:Arial,sans-serif;
+background:#eef2f5;
+margin:0;
+
+}
+
+header{
+
+background:#002868;
+color:white;
+padding:20px;
+text-align:center;
+
+}
+
+main{
+
+max-width:900px;
+margin:auto;
+padding:30px;
+
+}
+
+.card{
+
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}
+
+#section{
+
+color:#777;
+margin-bottom:10px;
+
+}
+
+#counter{
+
+font-size:18px;
+margin-bottom:20px;
+
+}
+
+#question{
+
+font-size:30px;
+font-weight:bold;
+line-height:1.5;
+margin-bottom:25px;
+
+}
+
+#answer{
+
+font-size:23px;
+color:darkgreen;
+line-height:1.5;
+
+}
+
+.word{
+
+cursor:pointer;
+padding:2px;
+border-radius:4px;
+transition:.15s;
+
+}
+
+.word:hover{
+
+background:gold;
+text-decoration:underline;
+
+}
+
+.controls{
+
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:30px;
+
+}
+
+button,select{
+
+padding:12px;
+font-size:17px;
+
+}
+
+button{
+
+cursor:pointer;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<img src="image.png" style="position:relative;top:10px;width:15%;">
+<h1>ESL-Friendly US Citizenship Test Practice</h1>
+<h1>Don't know a word? -> Click it to learn!</h1>
+
+</header>
+
+<main>
+
+
+<div class="card">
+
+<div class="controls">
+
+<button onclick="prev()">⬅ Previous</button>
+
+<button onclick="next()">Next ➜</button>
+
+<button onclick="randomQuestion()">🎲 Random</button>
+
+<button onclick="speakQuestion()">🔊 Question</button>
+
+<button onclick="speakAnswer()">🔊 Answer</button>
+
+<select id="jump"></select>
+<div id="counter"></div>
+
+</div>
+Section:
+<div  id="section"></div>
+<hr>
+<div id="question"></div>
+
+<hr>
+All are correct:
+<button onclick="showAnswer()">Show Answer</button>
+<div id="answer" style="display:none;"></div>
+
+
+</div>
+<p>* The civics
+test is an oral test and the USCIS officer will ask you to answer up to 20 out of the 128 civics test
+questions. You must answer at least 12 questions correctly to pass.</p>
+<p>* 65/20 Special Consideration
+If you are 65 years old or older and have been living in the United States as a lawful permanent
+resident of the United States for 20 or more years, you may study just the 20 questions that
+have been marked with an asterisk (*) found at the end of each question. You may also take
+the civics test in the language of your choice. The USCIS officer will ask you to answer 10 out of
+the 20 civics test questions with an asterisk. You must answer at least 6 out of 10 questions (or
+60%) correctly to pass the 2025 version of the civics test.</p>
+<p>* On the civics test, some answers may change because of elections or appointments. Visit
+uscis.gov/citizenship/testupdates to find any answers that may have changed on the civics
+test. You must answer the question with the name of the official serving at the time of your
+naturalization interview.</p>
+<p>* Questions and answers from https://www.uscis.gov/sites/default/files/document/questions-and-answers/2025-Civics-Test-128-Questions-and-Answers.pdf updated June, 2026 </p>
+</main>
+
+<script>
+function showAnswer(){
+    document.getElementById("answer").style.display = "block";
+}
+const questions=[ //go through and conjoin what makes sense using "&nbsp;" instead of space
+{
+section:"American Government",
+question:"What is the form of government of the United&nbsp;States?",
+answer:"• Republic. <br>• Constitution-based federal&nbsp;republic. <br>• Representative democracy."
+},
+{
+section:"American Government",
+question:"What is the supreme law of the land? *",
+answer:"(U.S.) Constitution"
+},
+{
+section:"American Government",
+question:"Name one thing the U.S.&nbsp;Constitution does.",
+answer:"• Forms the government. <br>• Defines powers of government. <br>• Defines the parts of government. <br>• Protects the rights of the people."
+},
+{
+section:"American Government",
+question:"The U.S.&nbsp;Constitution starts with the words “We&nbsp;the&nbsp;People.” What does “We&nbsp;the&nbsp;People” mean?",
+answer:"• Self-government. <br>• Popular sovereignty. <br>• Consent of the governed. <br>• People should govern themselves. <br>• (Example of) social contract."
+},
+{
+section:"American Government",
+question:"How are changes made to the U.S.&nbsp;Constitution?",
+answer:"• Amendments. <br>• The amendment process."
+},
+{
+section:"American Government",
+question:"What does the Bill of Rights protect?",
+answer:"• (The basic) rights of Americans. <br>• (The basic) rights of people living in the United&nbsp;States."
+},
+{
+section:"American Government",
+question:"How many amendments does the U.S.&nbsp;Constitution have? *",
+answer:"• Twenty-seven <br>• 27"
+},
+{
+section:"American Government",
+question:"Why is the Declaration of Independence important?",
+answer:"• It says America is free from British control. <br>• It says all people are created equal. <br>• It identifies inherent rights. <br>• It identifies individual freedoms."
+},
+{
+section:"American Government",
+question:"What founding document said the American colonies were free from Britain?",
+answer:"Declaration of Independence"
+},
+{
+section:"American Government",
+question:"Name two important ideas from the Declaration of Independence and the U.S.&nbsp;Constitution.",
+answer:"• Equality <br>• Liberty <br>• Social contract <br>• Natural rights <br>• Limited government <br>• Self-government"
+},
+{
+section:"American Government",
+question:"The words “Life, Liberty, and the pursuit of Happiness” are in what founding document?",
+answer:"Declaration of Independence"
+},
+{
+section:"American Government",
+question:"What is the economic system of the United&nbsp;States? *",
+answer:"• Capitalism <br>• Free market economy"
+},
+{
+section:"American Government",
+question:"What is the rule of law?",
+answer:"• Everyone must follow the law. <br>• Leaders must obey the law. <br>• Government must obey the law. <br>• No one is above the law."
+},
+{
+section:"American Government",
+question:"Many documents influenced the U.S.&nbsp;Constitution. Name one.",
+answer:"• Declaration of Independence <br>• Articles of Confederation <br>• Federalist Papers <br>• Anti-Federalist Papers <br>• Virginia Declaration of Rights <br>• Fundamental Orders of Connecticut <br>• Mayflower Compact <br>• Iroquois Great Law of Peace"
+},
+{
+section:"American Government",
+question:"There are three branches of government. Why?",
+answer:"• So one part does not become too powerful <br>• Checks and balances <br>• Separation of powers"
+},
+{
+section:"American Government",
+question:"Name the three branches of government.",
+answer:"• Legislative, executive, and judicial <br>• Congress, president, and the courts"
+},
+{
+section:"American Government",
+question:"The President of the United&nbsp;States is in charge of which branch of government?",
+answer:"Executive branch"
+},
+{
+section:"American Government",
+question:"What part of the federal government writes laws?",
+answer:"• (U.S.) Congress <br>• (U.S. or national) legislature <br>• Legislative branch"
+},
+{
+section:"American Government",
+question:"What are the two parts of the U.S.&nbsp;Congress?",
+answer:"Senate and House (of Representatives)"
+},
+{
+section:"American Government",
+question:"Name one power of the U.S.&nbsp;Congress. *",
+answer:"• Writes laws <br>• Declares war <br>• Makes the federal budget"
+},
+{
+section:"American Government",
+question:"How many U.S.&nbsp;senators are there?",
+answer:"• One hundred <br>• 100"
+},
+{
+section:"American Government",
+question:"How long is a term for a U.S.&nbsp;senator?",
+answer:"• Six <br>• 6 years"
+},
+{
+section:"American Government",
+question:"Who is one of your state’s U.S.&nbsp;senators now?",
+answer:"Answers will vary. [District of Columbia residents and residents of U.S. territories should answer that D.C. (or the territory where the applicant lives) has no U.S. senators.]"
+},
+{
+section:"American Government",
+question:"How many voting members are in the House of Representatives?",
+answer:"• Four hundred thirty-five <br>• 435"
+},
+{
+section:"American Government",
+question:"How long is a term for a member of the House of Representatives?",
+answer:"• Two <br>• 2 years"
+},
+{
+section:"American Government",
+question:"Why do U.S.&nbsp;representatives serve shorter terms than U.S.&nbsp;senators?",
+answer:"To more closely follow public opinion"
+},
+{
+section:"American Government",
+question:"How many senators does each state have?",
+answer:"• Two <br>• 2"
+},
+{
+section:"American Government",
+question:"Why does each state have two senators?",
+answer:"• Equal representation (for small states) <br>• The Great Compromise (Connecticut Compromise)"
+},
+{
+section:"American Government",
+question:"Name your U.S.&nbsp;representative.",
+answer:"Answers will vary. [Residents of territories with nonvoting Delegates or Resident Commissioners may provide the name of that Delegate or Commissioner. Also acceptable is any statement that the territory has no (voting) representatives in Congress.]"
+},
+{
+section:"American Government",
+question:"What is the name of the Speaker of the House of Representatives now? *",
+answer:"Visit uscis.gov/citizenship/testupdates for the name of the Speaker of the House of Representatives."
+},
+{
+section:"American Government",
+question:"Who does a U.S.&nbsp;senator represent?",
+answer:"• Citizens of their state <br>• People of their state"
+},
+{
+section:"American Government",
+question:"Who elects U.S.&nbsp;senators?",
+answer:"Citizens from their state"
+},
+{
+section:"American Government",
+question:"Who does a member of the House of Representatives represent?",
+answer:"• Citizens in their (congressional) district <br>• Citizens in their district <br>• People from their (congressional) district <br>• People in their district"
+},
+{
+section:"American Government",
+question:"Who elects members of the House of Representatives?",
+answer:"Citizens from their (congressional) district"
+},
+{
+section:"American Government",
+question:"Some states have more representatives than other states. Why?",
+answer:"• (Because of) the state’s population <br>• (Because) they have more people <br>• (Because) some states have more people"
+},
+{
+section:"American Government",
+question:"The President of the United&nbsp;States is elected for how many years? *",
+answer:"• Four <br>• 4 years"
+},
+{
+section:"American Government",
+question:"The President of the United&nbsp;States can serve only two terms. Why?",
+answer:"• (Because of) the 22nd Amendment <br>• To keep the president from becoming too powerful"
+},
+{
+section:"American Government",
+question:"What is the name of the President of the United&nbsp;States now? *",
+answer:"Visit uscis.gov/citizenship/testupdates for the name of the President of the United States."
+},
+{
+section:"American Government",
+question:"What is the name of the Vice President of the United&nbsp;States now? *",
+answer:"Visit uscis.gov/citizenship/testupdates for the name of the Vice President of the United States."
+},
+{
+section:"American Government",
+question:"If the president can no longer serve, who becomes president?",
+answer:"The Vice President (of the United States)"
+},
+{
+section:"American Government",
+question:"Name one power of the president.",
+answer:"• Signs bills into law <br>• Vetoes bills <br>• Enforces laws <br>• Commander in Chief (of the military) <br>• Chief diplomat <br>• Appoints federal judges"
+},
+{
+section:"American Government",
+question:"Who is Commander in Chief of the U.S.&nbsp;military?",
+answer:"The President (of the United States)"
+},
+{
+section:"American Government",
+question:"Who signs bills to become laws?",
+answer:"The President (of the United States)"
+},
+{
+section:"American Government",
+question:"Who vetoes bills? *",
+answer:"The President (of the United States)"
+},
+{
+section:"American Government",
+question:"Who appoints federal judges?",
+answer:"The President (of the United States)"
+},
+{
+section:"American Government",
+question:"The executive branch has many parts. Name one.",
+answer:"• President (of the United States) <br>• Cabinet <br>• Federal departments and agencies"
+},
+{
+section:"American Government",
+question:"What does the President’s Cabinet do?",
+answer:"Advises the President (of the United States)"
+},
+{
+section:"American Government",
+question:"What are two Cabinet-level positions?",
+answer:"• Attorney General <br>• Secretary of Agriculture <br>• Secretary of Commerce <br>• Secretary of Education <br>• Secretary of Energy <br>• Secretary of Health and Human Services <br>• Secretary of Homeland Security <br>• Secretary of Housing and Urban Development <br>• Secretary of the Interior <br>• Secretary of Labor <br>• Secretary of State <br>• Secretary of Transportation <br>• Secretary of the Treasury <br>• Secretary of Veterans Affairs <br>• Secretary of War (Defense) <br>• Vice-President <br>• Administrator of the Environmental Protection Agency <br>• Administrator of the Small Business Administration <br>• Director of the Central Intelligence Agency <br>• Director of the Office of Management and Budget <br>• Director of National Intelligence <br>• United States Trade Representative"
+},
+{
+section:"American Government",
+question:"Why is the Electoral College important?",
+answer:"• It decides who is elected president. <br>• It provides a compromise between the popular election of the president and congressional selection."
+},
+{
+section:"American Government",
+question:"What is one part of the judicial branch?",
+answer:"• Supreme Court <br>• Federal Courts"
+},
+{
+section:"American Government",
+question:"What does the judicial branch do?",
+answer:"• Reviews laws <br>• Explains laws <br>• Resolves disputes (disagreements) about the law <br>• Decides if a law goes against the (U.S.) Constitution"
+},
+{
+section:"American Government",
+question:"What is the highest court in the United&nbsp;States? *",
+answer:"Supreme Court"
+},
+{
+section:"American Government",
+question:"How many seats are on the Supreme Court?",
+answer:"• Nine <br>• 9"
+},
+{
+section:"American Government",
+question:"How many Supreme Court justices are usually needed to decide a case?",
+answer:"• Five <br>• 5"
+},
+{
+section:"American Government",
+question:"How long do Supreme Court justices serve?",
+answer:"• (For) life <br>• Lifetime appointment <br>• (Until) retirement"
+},
+{
+section:"American Government",
+question:"Supreme Court justices serve for life. Why?",
+answer:"• To be independent (of politics) <br>• To limit outside (political) influence"
+},
+{
+section:"American Government",
+question:"Who is the Chief Justice of the United&nbsp;States now?",
+answer:"Visit uscis.gov/citizenship/testupdates for the name of the Chief Justice of the United States."
+},
+{
+section:"American Government",
+question:"Name one power that is only for the federal government.",
+answer:"• Print paper money <br>• Mint coins <br>• Declare war <br>• Create an army <br>• Make treaties <br>• Set foreign policy"
+},
+{
+section:"American Government",
+question:"Name one power that is only for the states.",
+answer:"• Provide schooling and education <br>• Provide protection (police) <br>• Provide safety (fire departments) <br>• Give a driver’s license <br>• Approve zoning and land use"
+},
+{
+section:"American Government",
+question:"What is the purpose of the 10th Amendment?",
+answer:"(It states that the) powers not given to the federal government belong to the states or to the people."
+},
+{
+section:"American Government",
+question:"Who is the governor of your state now? *",
+answer:"Answers will vary. [District of Columbia residents should answer that D.C. does not have a governor.]"
+},
+{
+section:"American Government",
+question:"What is the capital of your state?",
+answer:"Answers will vary. [District of Columbia residents should answer that D.C. is not a state and does not have a capital. Residents of U.S. territories should name the capital of the territory.]"
+},
+{
+section:"American Government",
+question:"There are four amendments to the U.S.&nbsp;Constitution about who can vote. Describe one of them.",
+answer:"• Citizens eighteen (18) and older (can vote). <br>• You don’t have to pay (a poll tax) to vote. <br>• Any citizen can vote. (Women and men can vote.) <br>• A male citizen of any race (can vote)."
+},
+{
+section:"American Government",
+question:"Who can vote in federal elections, run for federal office, and serve on a jury in the United&nbsp;States?",
+answer:"• Citizens <br>• Citizens of the United States <br>• U.S. citizens"
+},
+{
+section:"American Government",
+question:"What are three rights of everyone living in the United&nbsp;States?",
+answer:"• Freedom of expression <br>• Freedom of speech <br>• Freedom of assembly <br>• Freedom to petition the government <br>• Freedom of religion <br>• The right to bear arms"
+},
+{
+section:"American Government",
+question:"What do we show loyalty to when we say the Pledge of Allegiance? *",
+answer:"• The United States <br>• The flag"
+},
+{
+section:"American Government",
+question:"Name two promises that new citizens make in the Oath of Allegiance.",
+answer:"• Give up loyalty to other countries <br>• Defend the (U.S.) Constitution <br>• Obey the laws of the United States <br>• Serve in the military (if needed) <br>• Serve (help, do important work for) the nation (if needed) <br>• Be loyal to the United States"
+},
+{
+section:"American Government",
+question:"How can people become United&nbsp;States citizens?",
+answer:"• Be born in the United States, under the conditions set by the 14th Amendment <br>• Naturalize <br>• Derive citizenship (under conditions set by Congress)"
+},
+{
+section:"American Government",
+question:"What are two examples of civic participation in the United&nbsp;States?",
+answer:"• Vote <br>• Run for office <br>• Join a political party <br>• Help with a campaign <br>• Join a civic group <br>• Join a community group <br>• Give an elected official your opinion (on an issue) <br>• Contact elected officials <br>• Support or oppose an issue or policy <br>• Write to a newspaper"
+},
+{
+section:"American Government",
+question:"What is one way Americans can serve their country?",
+answer:"• Vote <br>• Pay taxes <br>• Obey the law <br>• Serve in the military <br>• Run for office <br>• Work for local, state, or federal government"
+},
+{
+section:"American Government",
+question:"Why is it important to pay federal taxes?",
+answer:"• Required by law <br>• All people pay to fund the federal government <br>• Required by the (U.S.) Constitution (16th Amendment) <br>• Civic duty"
+},
+{
+section:"American Government",
+question:"It is important for all men age 18 through 25 to register for the Selective Service. Name one reason why.",
+answer:"• Required by law <br>• Civic duty <br>• Makes the draft fair, if needed"
+},
+{
+section:"American History",
+question:"The colonists came to America for many reasons. Name one.",
+answer:"• Freedom <br>• Political liberty <br>• Religious freedom <br>• Economic opportunity <br>• Escape persecution"
+},
+{
+section:"American History",
+question:"Who lived in America before the Europeans arrived? *",
+answer:"• American Indians <br>• Native Americans"
+},
+{
+section:"American History",
+question:"What group of people was taken and sold as slaves?",
+answer:"• Africans <br>• People from Africa"
+},
+{
+section:"American History",
+question:"What war did the Americans fight to win independence from Britain?",
+answer:"• American Revolution <br>• The (American) Revolutionary War <br>• War for (American) Independence"
+},
+{
+section:"American History",
+question:"Name one reason why the Americans declared independence from Britain.",
+answer:"• High taxes <br>• Taxation without representation <br>• British soldiers stayed in Americans’ houses (boarding, quartering) <br>• They did not have self-government <br>• Boston Massacre <br>• Boston Tea Party (Tea Act) <br>• Stamp Act <br>• Sugar Act <br>• Townshend Acts <br>• Intolerable (Coercive) Acts"
+},
+{
+section:"American History",
+question:"Who wrote the Declaration of Independence? *",
+answer:"(Thomas) Jefferson"
+},
+{
+section:"American History",
+question:"When was the Declaration of Independence adopted?",
+answer:"July 4, 1776"
+},
+{
+section:"American History",
+question:"The American Revolution had many important events. Name one.",
+answer:"• (Battle of) Bunker Hill <br>• Declaration of Independence <br>• Washington Crossing the Delaware (Battle of Trenton) <br>• (Battle of) Saratoga <br>• Valley Forge (Encampment) <br>• (Battle of) Yorktown (British surrender at Yorktown)"
+},
+{
+section:"American History",
+question:"There were 13 original states. Name five.",
+answer:"• New Hampshire <br>• Massachusetts <br>• Rhode Island <br>• Connecticut <br>• New York <br>• New Jersey <br>• Pennsylvania <br>• Delaware <br>• Maryland <br>• Virginia <br>• North Carolina <br>• South Carolina <br>• Georgia"
+},
+{
+section:"American History",
+question:"What founding document was written in 1787?",
+answer:"(U.S.) Constitution"
+},
+{
+section:"American History",
+question:"The Federalist Papers supported the passage of the U.S.&nbsp;Constitution. Name one of the writers.",
+answer:"• (James) Madison <br>• (Alexander) Hamilton <br>• (John) Jay <br>• Publius"
+},
+{
+section:"American History",
+question:"Why were the Federalist Papers important?",
+answer:"• They helped people understand the (U.S.) Constitution. <br>• They supported passing the (U.S.) Constitution."
+},
+{
+section:"American History",
+question:"Benjamin Franklin is famous for many things. Name one.",
+answer:"• Founded the first free public libraries <br>• First Postmaster General of the United States <br>• Helped write the Declaration of Independence <br>• Inventor <br>• U.S. diplomat"
+},
+{
+section:"American History",
+question:"George Washington is famous for many things. Name one. *",
+answer:"• “Father of Our Country” <br>• First president of the United States <br>• General of the Continental Army <br>• President of the Constitutional Convention"
+},
+{
+section:"American History",
+question:"Thomas Jefferson is famous for many things. Name one.",
+answer:"• Writer of the Declaration of Independence <br>• Third president of the United States <br>• Doubled the size of the United States (Louisiana Purchase) <br>• First Secretary of State <br>• Founded the University of Virginia <br>• Writer of the Virginia Statute on Religious Freedom"
+},
+{
+section:"American History",
+question:"James Madison is famous for many things. Name one.",
+answer:"• “Father of the Constitution” <br>• Fourth president of the United States <br>• President during the War of 1812 <br>• One of the writers of the Federalist Papers"
+},
+{
+section:"American History",
+question:"Alexander Hamilton is famous for many things. Name one.",
+answer:"• First Secretary of the Treasury <br>• One of the writers of the Federalist Papers <br>• Helped establish the First Bank of the United States <br>• Aide to General George Washington <br>• Member of the Continental Congress"
+},
+{
+section:"American History",
+question:"What territory did the United&nbsp;States buy from France in 1803?",
+answer:"• Louisiana Territory <br>• Louisiana"
+},
+{
+section:"American History",
+question:"Name one war fought by the United&nbsp;States in the 1800s.",
+answer:"• War of 1812 <br>• Mexican-American War <br>• Civil War <br>• Spanish-American War"
+},
+{
+section:"American History",
+question:"Name the U.S.&nbsp;war between the North and the South.",
+answer:"The Civil War"
+},
+{
+section:"American History",
+question:"The Civil War had many important events. Name one.",
+answer:"• (Battle of) Fort Sumter <br>• Emancipation Proclamation <br>• (Battle of) Vicksburg <br>• (Battle of) Gettysburg <br>• Sherman’s March <br>• (Surrender at) Appomattox <br>• (Battle of) Antietam/Sharpsburg <br>• Lincoln was assassinated."
+},
+{
+section:"American History",
+question:"Abraham Lincoln is famous for many things. Name one. *",
+answer:"• Freed the slaves (Emancipation Proclamation) <br>• Saved (or preserved) the Union <br>• Led the United States during the Civil War <br>• 16th president of the United States <br>• Delivered the Gettysburg Address"
+},
+{
+section:"American History",
+question:"What did the Emancipation Proclamation do?",
+answer:"• Freed the slaves <br>• Freed slaves in the Confederacy <br>• Freed slaves in the Confederate states <br>• Freed slaves in most Southern states"
+},
+{
+section:"American History",
+question:"What U.S.&nbsp;war ended slavery?",
+answer:"The Civil War"
+},
+{
+section:"American History",
+question:"What amendment says all persons born or naturalized in the United&nbsp;States, and subject to the jurisdiction thereof, are U.S.&nbsp;citizens?",
+answer:"14th Amendment"
+},
+{
+section:"American History",
+question:"When did all men get the right to vote?",
+answer:"• After the Civil War <br>• During Reconstruction <br>• (With the) 15th Amendment <br>• 1870"
+},
+{
+section:"American History",
+question:"Name one leader of the women’s rights movement in the 1800s.",
+answer:"• Susan B. Anthony <br>• Elizabeth Cady Stanton <br>• Sojourner Truth <br>• Harriet Tubman <br>• Lucretia Mott <br>• Lucy Stone"
+},
+{
+section:"American History",
+question:"Name one war fought by the United&nbsp;States in the 1900s.",
+answer:"• World War I <br>• World War II <br>• Korean War <br>• Vietnam War <br>• (Persian) Gulf War"
+},
+{
+section:"American History",
+question:"Why did the United&nbsp;States enter World War I?",
+answer:"• Because Germany attacked U.S. (civilian) ships <br>• To support the Allied Powers (England, France, Italy, and Russia) <br>• To oppose the Central Powers (Germany, Austria-Hungary, the Ottoman Empire, and Bulgaria)"
+},
+{
+section:"American History",
+question:"When did all women get the right to vote?",
+answer:"• 1920 <br>• After World War I <br>• (With the) 19th Amendment"
+},
+{
+section:"American History",
+question:"What was the Great Depression?",
+answer:"Longest economic recession in modern history"
+},
+{
+section:"American History",
+question:"When did the Great Depression start?",
+answer:"• The Great Crash (1929) <br>• Stock market crash of 1929"
+},
+{
+section:"American History",
+question:"Who was president during the Great Depression and World&nbsp;War&nbsp;II?",
+answer:"(Franklin) Roosevelt"
+},
+{
+section:"American History",
+question:"Why did the United&nbsp;States enter World War&nbsp;II?",
+answer:"• (Bombing of) Pearl Harbor <br>• Japanese attacked Pearl Harbor <br>• To support the Allied Powers (England, France, and Russia) <br>• To oppose the Axis Powers (Germany, Italy, and Japan)"
+},
+{
+section:"American History",
+question:"Dwight Eisenhower is famous for many things. Name one.",
+answer:"• General during World War II <br>• President at the end of (during) the Korean War <br>• 34th president of the United States <br>• Signed the Federal-Aid Highway Act of 1956 (Created the Interstate System)"
+},
+{
+section:"American History",
+question:"Who was the United&nbsp;States’ main rival during the Cold War?",
+answer:"• Soviet Union <br>• USSR <br>• Russia"
+},
+{
+section:"American History",
+question:"During the Cold War, what was one main concern of the United&nbsp;States?",
+answer:"• Communism <br>• Nuclear war"
+},
+{
+section:"American History",
+question:"Why did the United&nbsp;States enter the Korean War?",
+answer:"To stop the spread of communism"
+},
+{
+section:"American History",
+question:"Why did the United&nbsp;States enter the Vietnam War?",
+answer:"To stop the spread of communism"
+},
+{
+section:"American History",
+question:"What did the civil rights movement do?",
+answer:"Fought to end racial discrimination"
+},
+{
+section:"American History",
+question:"Martin Luther King, Jr. is famous for many things. Name one. *",
+answer:"• Fought for civil rights <br>• Worked for equality for all Americans <br>• Worked to ensure that people would “not be judged by the color of their skin, but by the content of their character”"
+},
+{
+section:"American History",
+question:"Why did the United&nbsp;States enter the Persian Gulf War?",
+answer:"To force the Iraqi military from Kuwait"
+},
+{
+section:"American History",
+question:"What major event happened on September&nbsp;11, 2001 in the United&nbsp;States? *",
+answer:"• Terrorists attacked the United States <br>• Terrorists took over two planes and crashed them into the World Trade Center in New York City <br>• Terrorists took over a plane and crashed into the Pentagon in Arlington, Virginia <br>• Terrorists took over a plane originally aimed at Washington, D.C., and crashed in a field in Pennsylvania"
+},
+{
+section:"American History",
+question:"Name one U.S.&nbsp;military conflict after the September&nbsp;11, 2001 attacks.",
+answer:"• (Global) War on Terror <br>• War in Afghanistan <br>• War in Iraq"
+},
+{
+section:"American History",
+question:"Name one American Indian tribe in the United&nbsp;States.",
+answer:"• Apache <br>• Blackfeet <br>• Cayuga <br>• Cherokee <br>• Cheyenne <br>• Chippewa <br>• Choctaw <br>• Creek <br>• Crow <br>• Hopi <br>• Huron <br>• Inupiat <br>• Lakota <br>• Mohawk <br>• Mohegan <br>• Navajo <br>• Oneida <br>• Onondaga <br>• Pueblo <br>• Seminole <br>• Seneca <br>• Shawnee <br>• Sioux <br>• Teton <br>• Tuscarora"
+},
+{
+section:"American History",
+question:"Name one example of an American innovation.",
+answer:"• Light bulb <br>• Automobile (cars, internal combustion engine) <br>• Skyscrapers <br>• Airplane <br>• Assembly line <br>• Landing on the moon <br>• Integrated circuit (IC)"
+},
+{
+section:"Symbols and Holidays",
+question:"What is the capital of the United&nbsp;States?",
+answer:"Washington, D.C."
+},
+{
+section:"Symbols and Holidays",
+question:"Where is the Statue of Liberty?",
+answer:"• New York (Harbor) <br>• Liberty Island [Also acceptable are New Jersey, near New York City, and on the Hudson (River).]"
+},
+{
+section:"Symbols and Holidays",
+question:"Why does the flag have 13 stripes? *",
+answer:"• (Because there were) 13 original colonies <br>• (Because the stripes) represent the original colonies"
+},
+{
+section:"Symbols and Holidays",
+question:"Why does the flag have 50 stars?",
+answer:"• (Because there is) one star for each state <br>• (Because) each star represents a state <br>• (Because there are) 50 states"
+},
+{
+section:"Symbols and Holidays",
+question:"What is the name of the national anthem?",
+answer:"The Star-Spangled Banner"
+},
+{
+section:"Symbols and Holidays",
+question:"The Nation’s first motto was “E&nbsp;Pluribus&nbsp;Unum.” What does that mean?",
+answer:"• Out of many, one <br>• We all become one"
+},
+{
+section:"Symbols and Holidays",
+question:"What is Independence Day?",
+answer:"• A holiday to celebrate U.S. independence (from Britain) <br>• The country’s birthday"
+},
+{
+section:"Symbols and Holidays",
+question:"Name three national U.S.&nbsp;holidays. *",
+answer:"• New Year’s Day <br>• Martin Luther King, Jr. Day <br>• Presidents Day (Washington’s Birthday) <br>• Memorial Day <br>• Juneteenth <br>• Independence Day <br>• Labor Day <br>• Columbus Day <br>• Veterans Day <br>• Thanksgiving Day <br>• Christmas Day"
+},
+{
+section:"Symbols and Holidays",
+question:"What is Memorial Day?",
+answer:"A holiday to honor soldiers who died in military service"
+},
+{
+section:"Symbols and Holidays",
+question:"What is Veterans Day?",
+answer:"• A holiday to honor people in the (U.S.) military <br>• A holiday to honor people who have served (in the U.S.) military"
+}
+
+
+];
+
+let current=0;
+
+function makeClickable(text){
+
+return text.split(/(\s+)/).map(word=>{
+
+if(word.trim()=="") return word;
+
+let clean = word.replace(/&nbsp;/g, " ")
+               .replace(/[^a-zA-Z' -]/g, "");
+return `<span class="word"
+title="Search definition"
+onclick="defineWord('${clean}')">${word}</span>`;
+
+}).join("");
+
+}
+
+async function defineWord(word) {
+
+    word = word
+        .replace(/&nbsp;/g, " ")
+        .replace(/\u00A0/g, " ")
+        .trim()
+        .replace(/\s+/g, " ");
+
+    const questionContext = questions[current].question
+        .replace(/&nbsp;/g, " ")
+        .replace(/\u00A0/g, " ");
+
+    const answerContext = questions[current].answer
+        .replace(/&nbsp;/g, " ")
+        .replace(/\u00A0/g, " ")
+        .replace(/<br>/g, " ");
+
+    document.getElementById("definitionPopup")?.remove();
+
+    const popup = document.createElement("div");
+
+    popup.id = "definitionPopup";
+
+    popup.innerHTML = `
+        <div style="
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.4);
+            z-index:99999;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:15px;
+        ">
+
+            <div style="
+                position:relative;
+                background:white;
+                width:95%;
+                max-width:650px;
+                max-height:85vh;
+                overflow-y:auto;
+                padding:25px;
+                border-radius:15px;
+                box-shadow:0 5px 25px rgba(0,0,0,.3);
+                font-family:Arial,sans-serif;
+            ">
+
+                <button onclick="
+                    document.getElementById('definitionPopup').remove()
+                " style="
+                    position:absolute;
+                    top:8px;
+                    right:12px;
+                    border:0;
+                    background:none;
+                    font-size:30px;
+                    cursor:pointer;
+                ">×</button>
+
+                <h2 style="
+                    margin:0 40px 15px 0;
+                    color:#002868;
+                ">
+                    ${escapeHtml(word)}
+                </h2>
+
+                <div id="aiDefinition" style="
+                    background:#f5f7f9;
+                    border-radius:10px;
+                    padding:18px;
+                    min-height:150px;
+                    font-size:18px;
+                    line-height:1.6;
+                ">
+                    🤖 Explaining...
+                </div>
+
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(popup);
+    popup.querySelector("div").onclick = function(e) {
+    if (e.target === this) popup.remove();
+};
+
+    try {
+
+        const response = await fetch(
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=" +
+            GEMINI_API_KEY,
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+
+                    contents:[{
+
+                        parts:[{
+
+                            text:
+`You are an extremely good ESL English teacher.
+
+You are helping a beginner English learner study for the U.S. citizenship civics test.
+
+The learner clicked this word:
+
+"${word}"
+
+The word appears in this citizenship question:
+
+"${questionContext}"
+
+The possible answer to the question is:
+
+"${answerContext}"
+
+YOUR JOB:
+
+Explain ONLY what "${word}" means in THIS question.
+
+The explanation must be easy for a BASIC English learner.
+
+IMPORTANT ESL RULES:
+
+- Use very simple English.
+- Use short sentences.
+- Prefer common everyday words.
+- Avoid difficult synonyms.
+- Avoid dictionary-style language.
+- Do not use complicated grammar.
+- Do not give several different meanings.
+- Do not explain unrelated meanings.
+- If you use another difficult word to explain the word, explain that word too or replace it.
+- Think about what an English learner would actually understand.
+- The student is learning English, not studying advanced vocabulary.
+
+Give exactly these three sections:
+
+DEFINITION:
+One very short and very simple definition.
+
+EXAMPLE:
+One very simple sentence using the word with the SAME meaning.
+
+IN THIS QUESTION:
+One short explanation showing what the word means in this specific citizenship question.
+
+Keep the entire response short.
+
+Do NOT add:
+- pronunciation
+- etymology
+- synonyms
+- multiple definitions
+- dictionary information
+- extra examples
+- greetings
+- commentary about being an AI`
+                        }]
+
+                    }]
+
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error?.message || "AI request failed"
+            );
+        }
+
+        const answer =
+            data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (!answer) {
+            throw new Error("No AI response");
+        }
+
+        document.getElementById("aiDefinition").innerHTML =
+            formatAIAnswer(answer);
+
+    } catch(error) {
+
+        console.error(error);
+
+        document.getElementById("aiDefinition").innerHTML = `
+            <div style="color:#b00020;">
+                Sorry, the definition could not be loaded.
+            </div>
+        `;
+    }
+}
+
+
+function formatAIAnswer(text) {
+
+    return escapeHtml(text)
+        .replace(
+            /DEFINITION:/gi,
+            '<strong style="color:#002868;">Definition:</strong><br>'
+        )
+        .replace(
+            /EXAMPLE:/gi,
+            '<br><strong style="color:#002868;">Example:</strong><br>'
+        )
+        .replace(
+            /CITIZENSHIP:/gi,
+            '<br><strong style="color:#002868;">Citizenship:</strong><br>'
+        )
+        .replace(/\n/g, "<br>");
+}
+
+
+function escapeHtml(text) {
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+const GEMINI_API_KEY = "AQ.Ab8RN6IjevZAVwyTyKBcvzutmRRxz_4k46kXtWIvi8aJiGZrSQ";
+
+function render(){
+
+let q=questions[current];
+
+document.getElementById("section").innerHTML=q.section;
+
+document.getElementById("counter").innerHTML=
+"Question "+(current+1)+" of "+questions.length;
+
+document.getElementById("question").innerHTML=
+makeClickable(q.question);
+
+document.getElementById("answer").innerHTML=
+makeClickable(q.answer);
+document.getElementById("answer").style.display = "none";
+document.getElementById("jump").value=current;
+
+}
+
+function next(){
+
+if(current<questions.length-1){
+
+current++;
+
+render();
+
+}
+
+}
+
+function prev(){
+
+if(current>0){
+
+current--;
+
+render();
+
+}
+
+}
+
+function randomQuestion(){
+
+current=Math.floor(Math.random()*questions.length);
+
+render();
+
+}
+
+function speakQuestion(){
+
+speechSynthesis.cancel();
+
+speechSynthesis.speak(
+
+new SpeechSynthesisUtterance(
+questions[current].question
+.replace(/&nbsp;/g, " "))
+
+);
+
+}
+
+function speakAnswer(){
+
+speechSynthesis.cancel();
+
+speechSynthesis.speak(
+
+new SpeechSynthesisUtterance(
+questions[current].answer
+.replace(/&nbsp;/g, " ")
+.replace(/<br>/g, ", "))
+
+
+
+);
+
+}
+
+const select=document.getElementById("jump");
+
+for(let i=0;i<questions.length;i++){
+
+let option=document.createElement("option");
+
+option.value=i;
+
+option.text="Question "+(i+1);
+
+select.appendChild(option);
+
+}
+
+select.onchange=function(){
+
+current=parseInt(this.value);
+
+render();
+
+}
+
+render();
+
+</script>
+
+</body>
+
+</html>
