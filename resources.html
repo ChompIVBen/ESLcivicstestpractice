@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<title>ESL-Friendly US Citizenship Test Practice: Resources</title>
+  <link rel="icon" href="image.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ESL-Friendly US Citizenship/Naturalization Test Practice: Resources">
+<style>
+:root{
+  --navy:#002868;
+  --navy-dark:#001b45;
+  --blue:#1357a6;
+  --red:#bf0a30;
+  --gold:#f6c344;
+  --ink:#132238;
+  --muted:#607089;
+  --paper:#ffffff;
+  --page:#eaf0f7;
+  --green:#087443;
+  --green-bg:#e8f8ef;
+  --line:#d8e1ec;
+  --shadow:0 18px 45px rgba(13, 39, 76, .14);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  min-height:100%;
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  margin:0;
+  color:var(--ink);
+  font-family:Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(19,87,166,.14), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(191,10,48,.11), transparent 35%),
+    var(--page);
+}
+
+header{
+  position:relative;
+  overflow:hidden;
+  padding:28px 20px 30px;
+  color:white;
+  text-align:center;
+  background:
+    linear-gradient(135deg, rgba(0,40,104,.98), rgba(0,27,69,.98)),
+    var(--navy);
+  border-bottom:5px solid var(--red);
+  box-shadow:0 5px 20px rgba(0,27,69,.25);
+}
+
+header::before,
+header::after{
+  position:absolute;
+  top:0;
+  width:28%;
+  height:100%;
+  content:"";
+  opacity:.14;
+  pointer-events:none;
+}
+
+header::before{
+  left:-7%;
+  transform:skewX(-22deg);
+  background:repeating-linear-gradient(
+    to bottom,
+    white 0 15px,
+    transparent 15px 30px
+  );
+}
+
+header::after{
+  right:-8%;
+  background:radial-gradient(circle, white 2px, transparent 3px);
+  background-size:22px 22px;
+}
+
+header h1,
+header h2,
+header p{
+  position:relative;
+  z-index:1;
+  margin:0;
+}
+
+header h1{
+  font-size:clamp(1.55rem, 4vw, 2.4rem);
+  letter-spacing:.4px;
+    font-weight:800;
+  line-height:1.35;
+  letter-spacing:-.025em;
+}
+
+header p{
+  max-width:700px;
+  margin:10px auto 0;
+  color:rgba(0, 0, 0, 0.86);
+  font-size:1rem;
+  line-height:1.5;
+}
+
+main{
+  width:min(100%, 980px);
+  margin:0 auto;
+  padding:38px 24px 55px;
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+  padding:clamp(22px, 4vw, 38px);
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+
+.card::before{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:7px;
+  content:"";
+      background: #ffffff;
+
+}
+.my-image {
+  position: relative;
+  padding-bottom: 10px;
+  width: 15%;
+}
+#section{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin:0 0 12px;
+  padding:7px 12px;
+  color:var(--blue);
+  font-size:.83rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  background:#edf5ff;
+  border:1px solid #cfe3fb;
+  border-radius:999px;
+}
+
+
+
+#counter{
+  margin:0 0 22px;
+  color:var(--muted);
+  font-size:1rem;
+  font-weight:700;
+}
+
+#question{
+  margin:0;
+  padding:22px 0 26px;
+  color:var(--navy-dark);
+  font-size:clamp(1.55rem, 4.3vw, 2.45rem);
+  font-weight:800;
+  line-height:1.35;
+  letter-spacing:-.025em;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+#answer{
+  min-height:68px;
+  margin-top:24px;
+  padding:20px 22px;
+  color:var(--green);
+  font-size:clamp(1.15rem, 3vw, 1.45rem);
+  font-weight:700;
+  line-height:1.65;
+  background:var(--green-bg);
+  border:1px solid #bfe8ce;
+  border-left:6px solid var(--green);
+  border-radius:12px;
+}
+
+#answer:empty{
+  display:none;
+}
+
+.word{
+  display:inline;
+  cursor:pointer;
+  padding:2px 3px;
+  color:inherit;
+  border-radius:5px;
+  transition:
+    background-color .16s ease,
+    color .16s ease,
+    box-shadow .16s ease;
+}
+
+.word:hover,
+.word:focus{
+  color:#302000;
+  text-decoration:none;
+  background:var(--gold);
+  outline:none;
+  box-shadow:0 0 0 3px rgba(246,195,68,.34);
+}
+
+.word:active{
+  background:#eeb22b;
+}
+
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:30px;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+}
+
+button,
+select{
+  min-height:48px;
+  padding:11px 16px;
+  font:inherit;
+  font-size:1rem;
+  font-weight:700;
+  border-radius:10px;
+}
+
+button{
+  flex:1 1 145px;
+  cursor:pointer;
+  color:white;
+  background:var(--navy);
+  border:1px solid var(--navy);
+  box-shadow:0 4px 0 var(--navy-dark);
+  transition:
+    transform .16s ease,
+    background-color .16s ease,
+    box-shadow .16s ease;
+}
+
+button:hover{
+  background:var(--blue);
+  border-color:var(--blue);
+  transform:translateY(-2px);
+  box-shadow:0 6px 0 var(--navy-dark);
+}
+
+button:active{
+  transform:translateY(3px);
+  box-shadow:0 1px 0 var(--navy-dark);
+}
+
+button:focus-visible,
+select:focus-visible{
+  outline:3px solid rgba(246,195,68,.9);
+  outline-offset:3px;
+}
+
+select{
+  flex:1 1 190px;
+  cursor:pointer;
+  color:var(--ink);
+  background-color:white;
+  border:1px solid #b7c6d8;
+}
+
+select:hover{
+  border-color:var(--blue);
+}
+
+/* Optional: use class="show-answer" on your reveal-answer button */
+.show-answer{
+  color:#382600;
+  background:var(--gold);
+  border-color:var(--gold);
+  box-shadow:0 4px 0 #c28c13;
+}
+
+.show-answer:hover{
+  background:#ffd76d;
+  border-color:#ffd76d;
+  box-shadow:0 6px 0 #c28c13;
+}
+
+@media (max-width:650px){
+
+  header{
+    padding:22px 16px 24px;
+  }
+
+  main{
+    padding:22px 14px 38px;
+  }
+
+  .card{
+    padding:22px 18px;
+    border-radius:15px;
+  }
+
+  #section{
+    font-size:.72rem;
+  }
+
+  #counter{
+    margin-bottom:17px;
+    font-size:.92rem;
+  }
+
+  #question{
+    padding:18px 0 21px;
+    font-size:1.55rem;
+    line-height:1.4;
+  }
+
+  #answer{
+    margin-top:19px;
+    padding:16px;
+    font-size:1.1rem;
+    line-height:1.55;
+    border-left-width:5px;
+  }
+
+  .controls{
+    gap:10px;
+    margin-top:23px;
+    padding-top:20px;
+  }
+
+  button,
+  select{
+    flex:1 1 100%;
+    width:100%;
+    min-height:52px;
+  }
+}
+
+@media (max-width:380px){
+  #question{
+    font-size:1.38rem;
+  }
+
+  #answer{
+    font-size:1rem;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    scroll-behavior:auto !important;
+    transition-duration:.01ms !important;
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+<img src="image.png" alt="Description of image" class="my-image">
+<h1>ESL-Friendly US Citizenship Test Practice: Resources</h1>
+</header>
+<main>
+<div>
+  <a href="index.html";>Test</a>
+  <p><strong>Study Resources*</strong></p>
+  <ul>
+    <li>
+      <a href="https://www.youtube.com/watch?v=JeuU9s1xkVQ&list=PLjqe3kScSP442W8JpUEmWXU_PRwNidxtB" target="_blank" rel="noopener noreferrer">
+        Video: Understand the Declaration of Independence in 5 Minutes - (YouTube Channel: Freedomists)
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.youtube.com/watch?v=5HVfcYEgFjI" target="_blank" rel="noopener noreferrer">
+        Video: Understand the Constitution - (YouTube Channel: Freedomists)
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.youtube.com/watch?v=DW8hSnPY--8" target="_blank" rel="noopener noreferrer">
+        Video: Understand the Bill of Rights in Less Than 5 Minutes - (YouTube Channel: Freedomists)
+      </a>
+    </li>
+  </ul>
+    <p>
+    <em>*For education only. These resources are not affiliated with EasyAmericanCivics.com.</em>
+  </p>
+</div>
+<hr>
+<ul>
+  <li>
+    The civics
+    test is an oral test and the USCIS officer will ask you to answer up to 20 out of the 128 civics test
+    questions. You must answer at least 12 questions correctly to pass.
+  </li>
+
+  <li>
+    If you are 65 years old or older and have been living in the United States as a lawful permanent
+    resident of the United States for 20 or more years, you may study just the 20 questions that
+    have been marked with an asterisk (*) found at the end of each question. You may also take
+    the civics test in the language of your choice. The USCIS officer will ask you to answer 10 out of
+    the 20 civics test questions with an asterisk. You must answer at least 6 out of 10 questions (or
+    60%) correctly to pass.
+  </li>
+
+  <li>
+    On the civics test, some answers may change because of elections or appointments. Visit
+    <a href="https://uscis.gov/citizenship/testupdates" target="_blank">uscis.gov/citizenship/testupdates</a>
+    to find any answers that may have changed on the civics test. You must answer the question with
+    the name of the official serving at the time of your naturalization interview.
+  </li>
+</ul>
+
+<p>
+  This is a free, unofficial study tool for educational purposes only. All questions and answers are reproduced directly from official USCIS document M-1778 (09/25), in June, 2026. Not affiliated with, endorsed by, or connected to USCIS or any U.S. government agency. Some answers change — always verify at
+  <a href="https://uscis.gov" target="_blank">uscis.gov</a> before your interview.
+</p>
+
+<p>
+  © 2026 All rights reserved - Made by Benjamin Wiest. Shoutout to Carrie!
+</p>
+</main>
+
+</body>
+
+</html>
